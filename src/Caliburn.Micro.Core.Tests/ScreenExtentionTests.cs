@@ -105,14 +105,14 @@ namespace Caliburn.Micro.Core.Tests
                 return Task.FromResult(IsClosable);
             }
 
-            protected override async Task OnActivateAsync(CancellationToken cancellationToken)
+            protected override async Task OnActivatingAsync(CancellationToken cancellationToken)
             {
                 if (deactivationDelay.HasValue)
                 {
                     await Task.Delay(deactivationDelay.Value, cancellationToken).ConfigureAwait(false);
                 }
 
-                await base.OnActivateAsync(cancellationToken);
+                await base.OnActivatingAsync(cancellationToken);
 
                 WasActivated = true;
                 IsClosable = false;

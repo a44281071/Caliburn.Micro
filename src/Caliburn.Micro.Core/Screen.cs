@@ -107,7 +107,7 @@ namespace Caliburn.Micro
             }
 
             Log.Info("Activating {0}.", this);
-            await OnActivateAsync(cancellationToken);
+            await OnActivatingAsync(cancellationToken);
             IsActive = true;
             await OnActivatedAsync(cancellationToken);
 
@@ -181,11 +181,10 @@ namespace Caliburn.Micro
         /// <summary>
         /// Called when activating.
         /// </summary>
-        protected virtual Task OnActivateAsync(CancellationToken cancellationToken)
+        protected virtual Task OnActivatingAsync(CancellationToken cancellationToken)
         {
             return Task.FromResult(true);
         }
-
 
         /// <summary>
         /// Called when view has been activated.

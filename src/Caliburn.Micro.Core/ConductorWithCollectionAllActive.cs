@@ -67,7 +67,7 @@ namespace Caliburn.Micro
                 /// <summary>
                 /// Called when activating.
                 /// </summary>
-                protected override Task OnActivateAsync(CancellationToken cancellationToken)
+                protected override Task OnActivatingAsync(CancellationToken cancellationToken)
                 {
                     return Task.WhenAll(_items.OfType<IActivate>().Select(x => x.ActivateAsync(cancellationToken)));
                 }

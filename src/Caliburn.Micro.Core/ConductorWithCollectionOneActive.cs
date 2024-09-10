@@ -188,7 +188,7 @@ namespace Caliburn.Micro
                 /// </summary>
                 /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
                 /// <returns>A task that represents the asynchronous operation.</returns>
-                protected override Task OnActivateAsync(CancellationToken cancellationToken)
+                protected override Task OnActivatingAsync(CancellationToken cancellationToken)
                 {
                     return ScreenExtensions.TryActivateAsync(ActiveItem, cancellationToken);
                 }
