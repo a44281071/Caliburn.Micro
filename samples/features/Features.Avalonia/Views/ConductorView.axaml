@@ -17,25 +17,22 @@
             <Button x:Name="CloseTab" Content="Close Tab" />
         </StackPanel>
 
-
         <ListBox x:Name="Items" Grid.Row="1" Margin="40,0">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <VirtualizingStackPanel Orientation="Horizontal"/>
+                    <WrapPanel />
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
-                        <Border>
-                            <TextBlock Text="{Binding DisplayName}" Width="150"></TextBlock>
-                        </Border>
-                    </StackPanel>
+                    <Border>
+                        <TextBlock Text="{Binding DisplayName}" MinWidth="50"></TextBlock>
+                    </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <ContentControl cal:View.Model="{Binding ActiveItem}" Grid.Row="2" Margin="40,20"/>
+        <ContentControl cal:View.Model="{Binding ActiveItem}" Grid.Row="2" Margin="40,20" Background="AliceBlue"/>
 
     </Grid>
 </UserControl>

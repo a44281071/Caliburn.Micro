@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
+using Avalonia.Controls.ApplicationLifetimes;
 using Caliburn.Micro;
 using Features.CrossPlatform.ViewModels;
-
 
 namespace Features.Avalonia
 {
@@ -19,7 +19,10 @@ namespace Features.Avalonia
             _container.Instance(_container); 
             
             Initialize();
+        }
 
+        protected override void OnStartup(object sender, ControlledApplicationLifetimeStartupEventArgs e)
+        {
             (DisplayRootViewFor<ShellViewModel>()).ConfigureAwait(false);
         }
 
@@ -43,7 +46,6 @@ namespace Features.Avalonia
                 .PerRequest<NavigationSourceViewModel>()
                 .PerRequest<NavigationTargetViewModel>();
         }
-
 
         protected override object GetInstance(Type service, string key)
         {
