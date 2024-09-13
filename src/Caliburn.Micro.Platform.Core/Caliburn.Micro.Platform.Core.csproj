@@ -8,8 +8,6 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
 
-
-
   <ItemGroup>
     <ProjectReference Include="..\Caliburn.Micro.Core\Caliburn.Micro.Core.csproj" />
   </ItemGroup>

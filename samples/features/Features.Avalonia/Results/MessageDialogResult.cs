@@ -1,5 +1,7 @@
 ﻿using System;
 using Caliburn.Micro;
+using MsBox.Avalonia.Enums;
+using MsBox.Avalonia;
 
 
 namespace Features.Avalonia.Results
@@ -17,10 +19,12 @@ namespace Features.Avalonia.Results
 
         public override async void Execute(CoroutineExecutionContext context)
         {
-            var dialog = MessageBox.Avalonia.MessageBoxManager
-  .GetMessageBoxStandardWindow("title", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed...");
+            var box = MessageBoxManager
+              .GetMessageBoxStandard("title", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed...",
+              ButtonEnum.YesNo);
 
-            await dialog.Show();
+            _ = await box.ShowAsync();
+
             OnCompleted();
         }
     }
