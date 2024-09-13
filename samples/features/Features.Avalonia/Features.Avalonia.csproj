@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <LangVersion>10</LangVersion>
     <AvaloniaNameGeneratorIsEnabled>false</AvaloniaNameGeneratorIsEnabled>
@@ -32,13 +32,12 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Caliburn.Micro.Avalonia">
-      <HintPath>..\..\..\bin\Caliburn.Micro.Avalonia\Release\net6.0\Caliburn.Micro.Avalonia.dll</HintPath>
+      <HintPath>..\..\..\bin\Caliburn.Micro.Avalonia\Release\net8.0\Caliburn.Micro.Avalonia.dll</HintPath>
     </Reference>
     <Reference Include="Caliburn.Micro.Core">
-      <HintPath>..\..\..\bin\Caliburn.Micro.Avalonia\Release\net6.0\Caliburn.Micro.Core.dll</HintPath>
+      <HintPath>..\..\..\bin\Caliburn.Micro.Avalonia\Release\net8.0\Caliburn.Micro.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
-
 
   <ItemGroup>
     <Compile Update="Views\ActionsView.axaml.cs">
@@ -48,7 +47,6 @@
       <DependentUpon>BindingsView.axaml</DependentUpon>
     </Compile>
   </ItemGroup>
-
 
   <Import Project="..\Features.CrossPlatform.Shared\Features.CrossPlatform.Shared.projitems" Label="Shared" />
 </Project>
