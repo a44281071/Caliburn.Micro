@@ -1,29 +1,49 @@
-<UserControl xmlns="https://github.com/avaloniaui"
+<UserControl x:Class="Avalonia3.StudentView"
+             xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:cm="http://caliburnmicro.com"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Avalonia3.StudentView">
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             mc:Ignorable="d">
 
-    <!-- StackPanel 垂直堆叠 -->
-    <StackPanel Margin="10">
-        <TextBlock Text="StudentView Vertical StackPanel"
-                   FontSize="16"
-                   FontWeight="Bold"
-                   Margin="5"/>
+  <!--  StackPanel 垂直堆叠  -->
+  <StackPanel Margin="10">
+    <TextBlock Margin="5"
+               FontSize="16"
+               FontWeight="Bold"
+               Text="StudentView Vertical StackPanel" />
 
-        <!-- 垂直堆叠的控件 -->
-        <TextBox Watermark="Student name" Margin="5"/>
-        <Button Content="Greet" Margin="5" />
-       
-        <!-- DockPanel -->
-        <DockPanel LastChildFill="False" Margin="5">
-            <TextBlock Text="DockPanel:" FontWeight="Bold" DockPanel.Dock="Left"/>
-            <Button Content="Top" DockPanel.Dock="Top" Margin="5"/>
-            <Button Content="Bottom" DockPanel.Dock="Bottom" Margin="5"/>
-            <Button Content="Left" DockPanel.Dock="Left" Margin="5"/>
-            <Button Content="Right" DockPanel.Dock="Right" Margin="5"/>
-            <Button Content="Fill" Margin="5"/>
-        </DockPanel>
-    </StackPanel>
+    <!--  垂直堆叠的控件  -->
+    <TextBox Name="StuName"
+             Margin="5"
+             Watermark="Student name" />
+    <WrapPanel>
+      <Button Name="RandomName"
+              Margin="5"
+              Content="Random name" />
+      <Button cm:Message.Attach="ClearName" Content="Clear name" />
+    </WrapPanel>
+
+    <!--  DockPanel  -->
+    <DockPanel Margin="5" LastChildFill="False">
+      <TextBlock DockPanel.Dock="Left"
+                 FontWeight="Bold"
+                 Text="DockPanel:" />
+      <Button Margin="5"
+              Content="Top"
+              DockPanel.Dock="Top" />
+      <Button Margin="5"
+              Content="Bottom"
+              DockPanel.Dock="Bottom" />
+      <Button Margin="5"
+              Content="Left"
+              DockPanel.Dock="Left" />
+      <Button Margin="5"
+              Content="Right"
+              DockPanel.Dock="Right" />
+      <Button Margin="5" Content="Fill" />
+    </DockPanel>
+  </StackPanel>
 </UserControl>
