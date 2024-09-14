@@ -80,9 +80,9 @@
                 "<ContentControl cal:View.Model=\"{Binding}\" VerticalContentAlignment=\"Stretch\" HorizontalContentAlignment=\"Stretch\" IsTabStop=\"False\" />" +
             "</DataTemplate>"
 #elif AVALONIA
-            "<DataTemplate xmlns=\"https://github.com/avaloniaui\" " +
-            "xmlns:cal='clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Avalonia'> " +
-                        "</DataTemplate>"
+            "<DataTemplate xmlns=\"https://github.com/avaloniaui\" xmlns:cal='clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Avalonia'> " +
+                "<ContentControl cal:View.Model=\"{Binding}\" VerticalContentAlignment=\"Stretch\" HorizontalContentAlignment=\"Stretch\" IsTabStop=\"False\" />" +
+            "</DataTemplate>"
 #else
              "<DataTemplate xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' " +
                            "xmlns:cal='clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform'> " +

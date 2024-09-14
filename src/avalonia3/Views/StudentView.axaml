@@ -1,0 +1,29 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Avalonia3.StudentView">
+
+    <!-- StackPanel 垂直堆叠 -->
+    <StackPanel Margin="10">
+        <TextBlock Text="StudentView Vertical StackPanel"
+                   FontSize="16"
+                   FontWeight="Bold"
+                   Margin="5"/>
+
+        <!-- 垂直堆叠的控件 -->
+        <TextBox Watermark="Student name" Margin="5"/>
+        <Button Content="Greet" Margin="5" />
+       
+        <!-- DockPanel -->
+        <DockPanel LastChildFill="False" Margin="5">
+            <TextBlock Text="DockPanel:" FontWeight="Bold" DockPanel.Dock="Left"/>
+            <Button Content="Top" DockPanel.Dock="Top" Margin="5"/>
+            <Button Content="Bottom" DockPanel.Dock="Bottom" Margin="5"/>
+            <Button Content="Left" DockPanel.Dock="Left" Margin="5"/>
+            <Button Content="Right" DockPanel.Dock="Right" Margin="5"/>
+            <Button Content="Fill" Margin="5"/>
+        </DockPanel>
+    </StackPanel>
+</UserControl>

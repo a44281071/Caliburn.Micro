@@ -1,0 +1,61 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Avalonia3.TeacherView">
+    <Grid>
+        <!-- 定义网格行和列 -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- 自动高度 -->
+            <RowDefinition Height="*"/>
+            <!-- 剩余空间 -->
+            <RowDefinition Height="Auto"/>
+            <!-- 自动高度 -->
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <!-- 剩余空间 -->
+            <ColumnDefinition Width="Auto"/>
+            <!-- 自动宽度 -->
+        </Grid.ColumnDefinitions>
+
+        <!-- 标题栏 -->
+        <TextBlock Text="Welcome to Avalonia3.TeacherView!"
+                   Grid.Row="0"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="2"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   FontSize="24"
+                   Margin="10"/>
+
+        <!-- 主要内容区域 -->
+        <TextBox Text="Type Teacher here..."
+                 Grid.Row="1"
+                 Grid.Column="0"
+                 Margin="10"
+                 VerticalAlignment="Center"
+                 HorizontalAlignment="Stretch"/>
+
+        <!-- 按钮 -->
+        <Button Content="Click Me"
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="10"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Width="100"
+                Height="30"/>
+
+        <!-- 状态栏 -->
+        <TextBlock Text="The end of the layout."
+                   Grid.Row="2"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="2"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Margin="10"/>
+    </Grid>
+</UserControl>
