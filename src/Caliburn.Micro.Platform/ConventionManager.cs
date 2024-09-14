@@ -328,11 +328,13 @@
             AddElementConvention<TabItem>(TabItem.ContentProperty, "DataContext", "DataContextChanged");
             AddElementConvention<Window>(Window.DataContextProperty, "DataContext", loadedEvent);
 #endif
+
 #if AVALONIA
             AddElementConvention<UserControl>(UserControl.IsVisibleProperty, "DataContext", loadedEvent);
 #else
             AddElementConvention<UserControl>(UserControl.VisibilityProperty, "DataContext", loadedEvent);
 #endif
+
             AddElementConvention<Image>(Image.SourceProperty, "Source", loadedEvent);
             AddElementConvention<ToggleButton>(ToggleButton.IsCheckedProperty, "IsChecked", "Click");
             AddElementConvention<ButtonBase>(ButtonBase.ContentProperty, "DataContext", "Click");
@@ -372,14 +374,11 @@
 
                     if (element.Content is DependencyObject && !OverwriteContent)
                         return null;
-                    var useViewModel = element.ContentTemplate == null;
-
 #if AVALONIA
-                    AddElementConvention<UserControl>(UserControl.IsVisibleProperty, "DataContext", loadedEvent);
+                    var useViewModel = element.ContentTemplate == null;
 #else
-                    AddElementConvention<UserControl>(UserControl.VisibilityProperty, "DataContext", loadedEvent);
+                    var useViewModel = element.ContentTemplate == null && element.ContentTemplateSelector == null;
 #endif
-
                     if (useViewModel)
                     {
                         Log.Info("ViewModel bound on {0}.", element.Name);
