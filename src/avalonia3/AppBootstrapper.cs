@@ -23,10 +23,15 @@ public class AppBootstrapper : BootstrapperBase
 
     protected override void OnStartup(object sender, ControlledApplicationLifetimeStartupEventArgs e)
     {
+        (DisplayRootViewFor<ShellViewModel>()).ConfigureAwait(false);
+
+        // Ensure_SizeToContent
+        /*
         dynamic settings = new ExpandoObject();
         settings.Width = 800;
         settings.Height = 500;
-        (DisplayRootViewFor<ShellViewModel>(settings)).ConfigureAwait(false);
+        (DisplayRootViewFor<WelcomeViewModel>(settings)).ConfigureAwait(false);
+         */
     }
 
     protected override void Configure()
@@ -36,7 +41,8 @@ public class AppBootstrapper : BootstrapperBase
             .Singleton<IEventAggregator, EventAggregator>();
 
         _container
-            .PerRequest<ShellViewModel>();
+            .PerRequest<ShellViewModel>()
+            .PerRequest<WelcomeViewModel>();
     }
 
     protected override object GetInstance(Type service, string key)

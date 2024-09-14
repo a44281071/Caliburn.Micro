@@ -14,7 +14,8 @@ namespace Caliburn.Micro
     /// </summary>
     public class WindowManager : IWindowManager
     {
-        static readonly ILog Log = LogManager.GetLog(typeof(WindowManager));
+        private static readonly ILog Log = LogManager.GetLog(typeof(WindowManager));
+
         /// <summary>
         /// Shows a modal dialog for the specified model.
         /// </summary>
@@ -134,7 +135,7 @@ namespace Caliburn.Micro
             Log.Info("Creating window for {0}.", rootModel);
             Control view1 = ViewLocator.LocateForModel(rootModel, null, context);
             Log.Info("Calling EnsureWindow");
-            var view = EnsureWindow(rootModel, view1);
+            var view = EnsureWindow(rootModel, view1, settings);
 
             var haveDisplayName = rootModel as IHaveDisplayName;
             if (string.IsNullOrEmpty(view.Title) && haveDisplayName != null && !ConventionManager.HasBinding(view, Window.TitleProperty))
@@ -156,16 +157,38 @@ namespace Caliburn.Micro
         /// </summary>
         /// <param name="model">The view model.</param>
         /// <param name="view">The view.</param>
+        /// <param name="settings">The optional popup settings.</param>
         /// <returns>The window.</returns>
-        protected virtual Window EnsureWindow(object model, object view)
+        protected virtual Window EnsureWindow(object model, object view, IDictionary<string, object> settings)
         {
-            if (!(view is Window window))
+            if (view is not Window window)
             {
+                bool haveWidth = settings?.ContainsKey(nameof(Window.Width)) ?? false;
+                bool haveHeight = settings?.ContainsKey(nameof(Window.Height)) ?? false;
+
                 window = new Window
                 {
                     Content = view,
-                    SizeToContent = SizeToContent.WidthAndHeight
                 };
+
+                #region Ensure_SizeToContent
+
+                if (haveWidth && haveHeight) { }  // keep Manual
+                else if (haveWidth)
+                {
+                    window.SizeToContent = SizeToContent.Height;
+                }
+                else if (haveHeight)
+                {
+                    window.SizeToContent = SizeToContent.Width;
+                }
+                else
+                {
+                    window.SizeToContent = SizeToContent.WidthAndHeight;
+                }
+
+                #endregion Ensure_SizeToContent
+
                 window.SetValue(View.IsGeneratedProperty, true);
                 window.WindowStartupLocation = InferOwnerOf(window) != null
                     ? WindowStartupLocation.CenterOwner
@@ -196,8 +219,6 @@ namespace Caliburn.Micro
 
             return active == window ? null : active;
         }
-
-
 
         private bool ApplySettings(object target, IEnumerable<KeyValuePair<string, object>> settings)
         {
