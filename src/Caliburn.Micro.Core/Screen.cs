@@ -99,21 +99,28 @@ namespace Caliburn.Micro
                 return;
 
             var initialized = false;
+            bool needInit = !IsInitialized;
 
-            if (!IsInitialized)
+            if (needInit)
             {
-                await OnInitializeAsync(cancellationToken);
+                await OnInitializingAsync(cancellationToken);
                 IsInitialized = initialized = true;
             }
 
             Log.Info("Activating {0}.", this);
-            await OnActivateAsync(cancellationToken);
+            await OnActivatingAsync(cancellationToken);
             IsActive = true;
+            await OnActivatedAsync(cancellationToken);
 
             await (Activated?.InvokeAllAsync(this, new ActivationEventArgs
             {
                 WasInitialized = initialized
             }) ?? Task.FromResult(true));
+
+            if (needInit && IsInitialized)
+            {
+                await OnInitializedAsync(cancellationToken);
+            }
         }
 
         async Task IDeactivate.DeactivateAsync(bool close, CancellationToken cancellationToken)
@@ -172,7 +179,12 @@ namespace Caliburn.Micro
         /// <summary>
         /// Called when initializing.
         /// </summary>
-        protected virtual Task OnInitializeAsync(CancellationToken cancellationToken)
+        protected virtual Task OnInitializingAsync(CancellationToken cancellationToken)
+        {
+            return Task.FromResult(true);
+        }
+
+        protected virtual Task OnInitializedAsync(CancellationToken cancellationToken)
         {
             return Task.FromResult(true);
         }
@@ -180,7 +192,15 @@ namespace Caliburn.Micro
         /// <summary>
         /// Called when activating.
         /// </summary>
-        protected virtual Task OnActivateAsync(CancellationToken cancellationToken)
+        protected virtual Task OnActivatingAsync(CancellationToken cancellationToken)
+        {
+            return Task.FromResult(true);
+        }
+
+        /// <summary>
+        /// Called when view has been activated.
+        /// </summary>
+        protected virtual Task OnActivatedAsync(CancellationToken cancellationToken)
         {
             return Task.FromResult(true);
         }

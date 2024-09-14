@@ -7,6 +7,28 @@ namespace Caliburn.Micro.Core.Tests
 {
     public class ConductorWithCollectionOneActiveTests
     {
+        private class BoomScreen : Screen
+        {
+            public bool IsClosed { get; private set; }
+            public bool IsClosable { get; set; }
+
+            public override Task<bool> CanCloseAsync(CancellationToken cancellationToken)
+            {
+                return Task.FromResult(IsClosable);
+            }
+
+            protected override async Task OnDeactivateAsync(bool close, CancellationToken cancellationToken)
+            {
+                await base.OnDeactivateAsync(close, cancellationToken);
+                IsClosed = close;
+            }
+
+            protected override Task OnActivatingAsync(CancellationToken cancellationToken)
+            {
+                return base.OnActivatingAsync(cancellationToken);
+            }
+        }
+
         private class StateScreen : Screen
         {
             public bool IsClosed { get; private set; }
