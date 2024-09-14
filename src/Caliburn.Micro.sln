@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Caliburn.Micro.Avalonia.Tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avalonia3", "avalonia3\Avalonia3.csproj", "{2D8FB14F-2DFA-4439-89D7-1D06CCA53613}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "demo", "demo", "{8C833127-ECAC-4C3B-AD42-EA5C769F3854}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -216,6 +218,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0CDB72A5-CD28-4A69-95CE-1BDE4B30C8F6} = {8C833127-ECAC-4C3B-AD42-EA5C769F3854}
+		{2D8FB14F-2DFA-4439-89D7-1D06CCA53613} = {8C833127-ECAC-4C3B-AD42-EA5C769F3854}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {99BBF104-8050-4AE7-BC95-117C12BB4AD9}

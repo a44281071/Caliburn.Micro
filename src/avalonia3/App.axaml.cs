@@ -21,6 +21,7 @@ public partial class App : Application
         */
 
         base.OnFrameworkInitializationCompleted();
-        new AppBootstrapper();
+
+        Resources.Add("bootstrapper", new AppBootstrapper());
     }
 }

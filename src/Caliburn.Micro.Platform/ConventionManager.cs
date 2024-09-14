@@ -76,18 +76,23 @@
         XamlReader.Parse(
 #endif
 #if WINDOWS_UWP
-            "<DataTemplate xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' xmlns:cal='using:Caliburn.Micro'>" +
-                "<ContentControl cal:View.Model=\"{Binding}\" VerticalContentAlignment=\"Stretch\" HorizontalContentAlignment=\"Stretch\" IsTabStop=\"False\" />" +
-            "</DataTemplate>"
+            """
+            <DataTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:cal="using:Caliburn.Micro">
+              <ContentControl cal:View.Model="{Binding}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" IsTabStop="False" />
+            </DataTemplate>
+            """
 #elif AVALONIA
-            "<DataTemplate xmlns=\"https://github.com/avaloniaui\" xmlns:cal='clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Avalonia'> " +
-                "<ContentControl cal:View.Model=\"{Binding}\" VerticalContentAlignment=\"Stretch\" HorizontalContentAlignment=\"Stretch\" IsTabStop=\"False\" />" +
-            "</DataTemplate>"
+            """
+            <DataTemplate xmlns="https://github.com/avaloniaui" xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Avalonia">
+              <ContentControl cal:View.Model="{Binding}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" IsTabStop="False" />
+            </DataTemplate>
+            """
 #else
-             "<DataTemplate xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' " +
-                           "xmlns:cal='clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform'> " +
-                "<ContentControl cal:View.Model=\"{Binding}\" VerticalContentAlignment=\"Stretch\" HorizontalContentAlignment=\"Stretch\" IsTabStop=\"False\" />" +
-            "</DataTemplate>"
+            """
+            <DataTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"> 
+              <ContentControl cal:View.Model="{Binding}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" IsTabStop="False" />
+            </DataTemplate>
+            """
 #endif
 );
 
@@ -125,11 +130,11 @@
         public static Func<string, IEnumerable<string>> DerivePotentialSelectionNames = name =>
         {
             var singular = Singularize(name);
-            return new[] {
+            return [
                 "Active" + singular,
                 "Selected" + singular,
                 "Current" + singular
-            };
+            ];
         };
 
         /// <summary>
@@ -183,7 +188,8 @@
             }
 #endif
 #if !WINDOWS_UWP && !AVALONIA
-            if (typeof(IDataErrorInfo).IsAssignableFrom(viewModelType)) {
+            if (typeof(IDataErrorInfo).IsAssignableFrom(viewModelType))
+            {
                 binding.ValidatesOnDataErrors = true;
                 binding.ValidatesOnExceptions = true;
             }
@@ -304,7 +310,7 @@
                     var tabControl = (TabControl)element;
                     if (tabControl.ContentTemplate == null
 #if !AVALONIA
-                        && tabControl.ContentTemplateSelector == null 
+                        && tabControl.ContentTemplateSelector == null
 #endif
                         && property.PropertyType.IsGenericType)
                     {
@@ -525,7 +531,8 @@
 #else
             if (!string.IsNullOrEmpty(itemsControl.DisplayMemberPath)
                 || HasBinding(itemsControl, ItemsControl.DisplayMemberPathProperty)
-                || itemsControl.ItemTemplate != null) {
+                || itemsControl.ItemTemplate != null)
+            {
                 return;
             }
 #endif
@@ -551,7 +558,7 @@
 #if !AVALONIA
             if (itemsControl.ItemTemplateSelector == null)
 #endif
-            itemsControl.ItemTemplate = DefaultItemTemplate;
+                itemsControl.ItemTemplate = DefaultItemTemplate;
             Log.Info("ItemTemplate applied to {0}.", itemsControl.Name);
         }
 

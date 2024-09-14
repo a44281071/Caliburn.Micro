@@ -7,17 +7,12 @@ using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Styling;
 
-
 namespace Caliburn.Micro;
 
 // Add xml comments
 [DebuggerDisplay($"{{{nameof(GetDebuggerDisplay)}(),nq}}")]
-public class NavigationFrame : TransitioningContentControl, IStyleable, INavigationService
+public class NavigationFrame : TransitioningContentControl, INavigationService
 {
-    private static readonly ILog Log = LogManager.GetLog(typeof(NavigationFrame));
-    
-    private string defaultContent { get; }= "Default Content";
-
     /// <summary>
     /// Initializes a new instance of the <see cref="NavigationFrame"/> class.
     /// </summary>
@@ -26,6 +21,10 @@ public class NavigationFrame : TransitioningContentControl, IStyleable, INavigat
         Content = defaultContent;
         this.AttachedToVisualTree += NavigationFrame_AttachedToVisualTree;
     }
+
+    private static readonly ILog Log = LogManager.GetLog(typeof(NavigationFrame));
+
+    private string defaultContent { get; } = "Default Content";
 
     private void NavigationFrame_AttachedToVisualTree(object sender, VisualTreeAttachmentEventArgs e)
     {
@@ -43,7 +42,7 @@ public class NavigationFrame : TransitioningContentControl, IStyleable, INavigat
         }
     }
 
-    Type IStyleable.StyleKey => typeof(TransitioningContentControl);
+    protected override Type StyleKeyOverride => typeof(TransitioningContentControl);
 
     /// <summary>
     /// Invoked when navigating to a view model.
@@ -51,7 +50,6 @@ public class NavigationFrame : TransitioningContentControl, IStyleable, INavigat
     /// <param name="viewModel">ViewModel to which the user navigates.</param>
     private void NavigateToViewModel(object? viewModel)
     {
-
         if (viewModel == null)
         {
             Log.Info("ViewModel is null. Falling back to default content.");
@@ -62,9 +60,7 @@ public class NavigationFrame : TransitioningContentControl, IStyleable, INavigat
         var viewInstance = ViewLocator.LocateForModel(viewModel, null, null);
         if (viewInstance == null)
         {
-
             Log.Warn($"Couldn't find view for '{viewModel}'. Is it registered? Falling back to default content.");
-
 
             Content = defaultContent;
             return;
@@ -74,9 +70,8 @@ public class NavigationFrame : TransitioningContentControl, IStyleable, INavigat
         Log.Info($"View Model {viewModel}");
         Log.Info($"View {viewInstance}");
         viewInstance.DataContext = viewModel;
-        Content =   viewInstance;
+        Content = viewInstance;
     }
-
 
     public Task GoBackAsync(bool animated = true)
     {
@@ -92,8 +87,8 @@ public class NavigationFrame : TransitioningContentControl, IStyleable, INavigat
     {
         throw new NotImplementedException();
     }
-/// <inheritdoc/>
 
+    /// <inheritdoc/>
     public Task NavigateToViewModelAsync(Type viewModelType, object parameter = null, bool animated = true)
     {
         Log.Info($"View model type {viewModelType}");
