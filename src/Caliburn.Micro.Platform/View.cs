@@ -332,7 +332,7 @@ namespace Caliburn.Micro
                     .GetValue(dependencyObject, null);
 #elif AVALONIA
                 var type = dependencyObject.GetType();
-                var contentProperty = type.GetProperties().FirstOrDefault(p => p.GetCustomAttributes(typeof(ContentAttribute), true).Any());
+                var contentProperty = type.GetProperties().FirstOrDefault(p => p.IsDefined(typeof(ContentAttribute), true));
                 return
                     contentProperty != null
                         ? contentProperty.GetValue(dependencyObject, null)
@@ -509,7 +509,7 @@ namespace Caliburn.Micro
             {
                 var type = targetLocation.GetType();
 #if AVALONIA
-                var contentProperty = type.GetProperties().FirstOrDefault(p => p.GetCustomAttributes(typeof(ContentAttribute), true).Any());
+                var contentProperty = type.GetProperties().FirstOrDefault(p => p.IsDefined(typeof(ContentAttribute), true));
 
                 type.GetProperty(contentProperty?.Name ?? "Content")?.SetValue(targetLocation, view, null);
 #else

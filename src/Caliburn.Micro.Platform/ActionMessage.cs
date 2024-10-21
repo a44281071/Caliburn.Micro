@@ -706,17 +706,16 @@
                 return null;
 
             var guardPars = guard.GetParameters();
-            var actionPars = context.Method.GetParameters();
             if (guardPars.Length == 0)
                 return guard;
+
+            var actionPars = context.Method.GetParameters();
             if (guardPars.Length != actionPars.Length)
                 return null;
 
-            var comparisons = guardPars.Zip(
-                context.Method.GetParameters(),
+            var comparisons = guardPars.Zip(actionPars,
                 (x, y) => x.ParameterType == y.ParameterType
                 );
-
             if (comparisons.Any(x => !x))
             {
                 return null;
@@ -730,7 +729,6 @@
         /// </summary>
         public static Func<MethodInfo, IEnumerable<string>> BuildPossibleGuardNames = method =>
         {
-
             var guardNames = new List<string>();
 
             const string GuardPrefix = "Can";
