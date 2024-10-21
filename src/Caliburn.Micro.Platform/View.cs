@@ -35,6 +35,7 @@ namespace Caliburn.Micro
     using Avalonia.Metadata;
     using Avalonia.VisualTree;
     using Avalonia.LogicalTree;
+    using Avalonia.Controls.Presenters;
 #elif MAUI
     using System.Reflection;
     using global::Microsoft.Maui.Controls;
@@ -509,9 +510,20 @@ namespace Caliburn.Micro
             {
                 var type = targetLocation.GetType();
 #if AVALONIA
-                var contentProperty = type.GetProperties().FirstOrDefault(p => p.IsDefined(typeof(ContentAttribute), true));
+                if (targetLocation is ContentControl tlcc)
+                {
+                    tlcc.Content = view;
+                }
+                else if (targetLocation is ContentPresenter tlcp)
+                {
+                    tlcp.Content = view;
+                }
+                else
+                {
+                    var contentProperty = type.GetProperties().FirstOrDefault(p => p.IsDefined(typeof(ContentAttribute), true));
+                    type.GetProperty(contentProperty?.Name ?? "Content")?.SetValue(targetLocation, view, null);
+                }
 
-                type.GetProperty(contentProperty?.Name ?? "Content")?.SetValue(targetLocation, view, null);
 #else
                 var contentProperty = type.GetCustomAttributes(typeof(ContentPropertyAttribute), true)
                                           .OfType<ContentPropertyAttribute>()
