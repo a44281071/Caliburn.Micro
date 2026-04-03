@@ -1,0 +1,14 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	    xmlns:local="using:AvaloniaApp1"
+        x:DataType="local:ShellViewModel"	  mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AvaloniaApp1.ShellView"
+        Title="ShellView">
+    <DockPanel>
+        <TextBlock DockPanel.Dock="Top" Text="{Binding DisplayName}"/>
+        <TabControl Name="Items"  Height="222" DisplayMemberBinding="{ReflectionBinding IsActive}" />
+   
+    </DockPanel>
+</Window>

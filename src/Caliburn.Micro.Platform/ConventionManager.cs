@@ -27,6 +27,7 @@
     using DependencyProperty = Avalonia.AvaloniaProperty;
     using ButtonBase = Avalonia.Controls.Button;
     using Selector = Avalonia.Controls.Primitives.SelectingItemsControl;
+    using Avalonia.Controls.Templates;
 #elif WinUI3
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
@@ -78,27 +79,13 @@
         /// <summary>
         /// The default DataTemplate used for ItemsControls when required.
         /// </summary>
-        public static DataTemplate DefaultItemTemplate = (DataTemplate)
-#if WINDOWS_UWP || WinUI3
-        XamlReader.Load(
-#else
-        XamlReader.Parse(
+#if AVALONIA
+        public static IDataTemplate DefaultItemTemplate = new FuncDataTemplate<object>((value, namescope) =>
+            new ContentControl
+            {
+                [!View.ModelProperty] = new ReflectionBinding("."),
+            });
 #endif
-#if WINDOWS_UWP || WinUI3
-            "<DataTemplate xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' xmlns:cal='using:Caliburn.Micro'>" +
-                "<ContentControl cal:View.Model=\"{Binding}\" VerticalContentAlignment=\"Stretch\" HorizontalContentAlignment=\"Stretch\" IsTabStop=\"False\" />" +
-            "</DataTemplate>"
-#elif AVALONIA
-            "<DataTemplate xmlns=\"https://github.com/avaloniaui\" " +
-            "xmlns:cal='clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.AvaloniaRx'> " +
-                        "</DataTemplate>"
-#else
-             "<DataTemplate xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' " +
-                $"xmlns:cal='clr-namespace:Caliburn.Micro;assembly={Assembly.GetExecutingAssembly().GetName().Name}'> " +
-                "<ContentControl cal:View.Model=\"{Binding}\" VerticalContentAlignment=\"Stretch\" HorizontalContentAlignment=\"Stretch\" IsTabStop=\"False\" />" +
-            "</DataTemplate>"
-#endif
-);
 
         /// <summary>
         /// The default DataTemplate used for Headered controls when required.
@@ -328,7 +315,10 @@
 
                     ConfigureSelectedItem(element, Selector.SelectedItemProperty, viewModelType, path);
 #if AVALONIA
-                    ApplyHeaderTemplate(tabControl, TabControl.ItemTemplateProperty, null, viewModelType);
+                    if (!tabControl.IsSet(TabControl.DisplayMemberBindingProperty))
+                    {
+                        ApplyHeaderTemplate(tabControl, TabControl.ItemTemplateProperty, null, viewModelType);
+                    }
 #else
                     if (string.IsNullOrEmpty(tabControl.DisplayMemberPath))
                         ApplyHeaderTemplate(tabControl, TabControl.ItemTemplateProperty, TabControl.ItemTemplateSelectorProperty, viewModelType);
@@ -531,7 +521,13 @@
         /// <param name="property">The collection property.</param>
         public static void ApplyItemTemplate(ItemsControl itemsControl, PropertyInfo property)
         {
-#if !AVALONIA
+#if AVALONIA
+            if (itemsControl.IsSet(ItemsControl.DisplayMemberBindingProperty)
+                || itemsControl.IsSet(ItemsControl.ItemTemplateProperty))
+            {
+                return;
+            }
+#else
             if (!string.IsNullOrEmpty(itemsControl.DisplayMemberPath)
                            || HasBinding(itemsControl, ItemsControl.DisplayMemberPathProperty)
                            || itemsControl.ItemTemplate != null)
@@ -682,3 +678,4 @@
         }
     }
 }
+

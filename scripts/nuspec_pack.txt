@@ -1,0 +1,1 @@
+C:\Users\sam\AppData\Local\AzureFunctionsTools\Releases\1.13.2\cli_x64\NuGet.exe pack Caliburn.Micro.Avalonia.nuspec -OutputDirectory ..\bin\packages

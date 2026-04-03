@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>SamTi.Caliburn.Micro.Avalonia</id>
+    <version>5.0.283-rc2</version>
+    <authors>SamTi,SunTai</authors>
+    <description>Caliburn.Micro for Avalonia-12</description>
+    <dependencies>
+      <group targetFramework="net8.0">
+        <!-- 声明依赖，但不嵌入 -->
+        <dependency id="Avalonia" version="12.0.0-rc2" />
+        <dependency id="Avalonia.Desktop" version="12.0.0-rc2" />
+        <dependency id="Avalonia.Markup.Xaml.Loader" version="12.0.0-rc2" />
+        <dependency id="Xaml.Behaviors.Avalonia" version="12.0.0-rc1" />
+        <dependency id="Xaml.Behaviors.Interactivity" version="12.0.0-rc1" />
+        <dependency id="System.Reactive" version="6.0.1" />
+      </group>
+      <group targetFramework="net10.0">
+        <dependency id="Avalonia" version="12.0.0-rc2" />
+        <dependency id="Avalonia.Desktop" version="12.0.0-rc2" />
+        <dependency id="Avalonia.Markup.Xaml.Loader" version="12.0.0-rc2" />
+        <dependency id="Xaml.Behaviors.Avalonia" version="12.0.0-rc1" />
+        <dependency id="Xaml.Behaviors.Interactivity" version="12.0.0-rc1" />
+        <dependency id="System.Reactive" version="6.0.1" />
+      </group>
+    </dependencies>
+  </metadata>
+  
+  <files>
+    <!-- 自己的 DLL -->
+    <file src="..\bin\Caliburn.Micro.Avalonia\release\net8.0\Caliburn.Micro.Avalonia.dll" target="lib\net8.0" />
+    <file src="..\bin\Caliburn.Micro.Avalonia\release\net8.0\Caliburn.Micro.Avalonia.pdb" target="lib\net8.0" />
+    <file src="..\bin\Caliburn.Micro.Avalonia\release\net8.0\Caliburn.Micro.Avalonia.xml" target="lib\net8.0" />
+    <file src="..\bin\Caliburn.Micro.Avalonia\release\net10.0\Caliburn.Micro.Avalonia.dll" target="lib\net10.0" />
+    <file src="..\bin\Caliburn.Micro.Avalonia\release\net10.0\Caliburn.Micro.Avalonia.pdb" target="lib\net10.0" />
+    <file src="..\bin\Caliburn.Micro.Avalonia\release\net10.0\Caliburn.Micro.Avalonia.xml" target="lib\net10.0" />
+    
+    <!-- 显式嵌入引用的 DLL -->
+    <file src="..\bin\Caliburn.Micro.Avalonia\release\net8.0\Caliburn.Micro.Core.dll" target="lib\net8.0" />
+    <file src="..\bin\Caliburn.Micro.Avalonia\release\net8.0\Caliburn.Micro.Core.pdb" target="lib\net8.0" />
+    <file src="..\bin\Caliburn.Micro.Avalonia\release\net8.0\Caliburn.Micro.Core.xml" target="lib\net8.0" />
+    <file src="..\bin\Caliburn.Micro.Avalonia\release\net10.0\Caliburn.Micro.Core.dll" target="lib\net10.0" />
+    <file src="..\bin\Caliburn.Micro.Avalonia\release\net10.0\Caliburn.Micro.Core.pdb" target="lib\net10.0" />
+    <file src="..\bin\Caliburn.Micro.Avalonia\release\net10.0\Caliburn.Micro.Core.xml" target="lib\net10.0" />
+
+    <file src="..\bin\Caliburn.Micro.Avalonia\release\net8.0\Caliburn.Micro.Platform.Core.dll" target="lib\net8.0" />
+    <file src="..\bin\Caliburn.Micro.Avalonia\release\net8.0\Caliburn.Micro.Platform.Core.pdb" target="lib\net8.0" />
+    <file src="..\bin\Caliburn.Micro.Avalonia\release\net8.0\Caliburn.Micro.Platform.Core.xml" target="lib\net8.0" />    
+    <file src="..\bin\Caliburn.Micro.Avalonia\release\net10.0\Caliburn.Micro.Platform.Core.dll" target="lib\net10.0" />
+    <file src="..\bin\Caliburn.Micro.Avalonia\release\net10.0\Caliburn.Micro.Platform.Core.pdb" target="lib\net10.0" />
+    <file src="..\bin\Caliburn.Micro.Avalonia\release\net10.0\Caliburn.Micro.Platform.Core.xml" target="lib\net10.0" />
+  </files>
+</package>

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net8.0;</TargetFrameworks>
+    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
     <PackageId>Caliburn.Micro.Avalonia</PackageId>
     <Product>Caliburn.Micro</Product>
     <RootNamespace>Caliburn.Micro</RootNamespace>
@@ -18,6 +18,8 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <!-- Generate symbols package -->
     <IncludeSymbols>false</IncludeSymbols>
+    <DisableImplicitFrameworkReferences>false</DisableImplicitFrameworkReferences>
+
   </PropertyGroup>
 
   <PropertyGroup>
@@ -27,23 +29,17 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0|AnyCPU'" />
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0|AnyCPU'" />
-
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="11.3.5" />
-    <PackageReference Include="Avalonia.Desktop" Version="11.3.5" />
-    <PackageReference Include="Avalonia.Diagnostics" Version="11.3.5" />
-    <PackageReference Include="Avalonia.Markup.Xaml.Loader" Version="11.3.5" />
+    <PackageReference Include="Avalonia" Version="12.0.0-rc2" />
+    <PackageReference Include="Avalonia.Desktop" Version="12.0.0-rc2" />
+    <PackageReference Include="Avalonia.Markup.Xaml.Loader" Version="12.0.0-rc2" />
     <PackageReference Include="System.Reactive" Version="6.0.1" />
-    <PackageReference Include="Xaml.Behaviors.Avalonia" Version="11.3.2" />
-    <PackageReference Include="Xaml.Behaviors.Interactivity" Version="11.3.2" />
+    <PackageReference Include="Xaml.Behaviors.Avalonia" Version="12.0.0-rc1" />
+    <PackageReference Include="Xaml.Behaviors.Interactivity" Version="12.0.0-rc1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Caliburn.Micro.Platform.Core\Caliburn.Micro.Platform.Core.csproj" PrivateAssets="all">
+    <ProjectReference Include="..\Caliburn.Micro.Platform.Core\Caliburn.Micro.Platform.Core.csproj" PrivateAssets="compile">
     </ProjectReference>
     <ProjectReference Include="..\Caliburn.Micro.Core\Caliburn.Micro.Core.csproj" >
     </ProjectReference>
@@ -99,11 +95,11 @@
     </ItemGroup>
   </Target>
 
-
   <Target Name="IncludeReferenceAssemblies">
     <ItemGroup>
       <TfmSpecificPackageFile Include="$(TargetRefPath)" PackagePath="ref/$(TargetFramework)" />
       <TfmSpecificPackageFile Include="$(DocumentationFile)" PackagePath="ref/$(TargetFramework)" Condition="'$(GenerateDocumentationFile)' == 'true'" />
     </ItemGroup>
   </Target>
+
 </Project>
